@@ -1,0 +1,7 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+@import "bootstrap/dist/css/bootstrap.min.css";
+@import "project_delta/lib/project_delta_web/controllers/page_html/home.html.heex";
+@import "project_delta/lib/project_delta_web/controllers/layouts/root.html.heex";
+

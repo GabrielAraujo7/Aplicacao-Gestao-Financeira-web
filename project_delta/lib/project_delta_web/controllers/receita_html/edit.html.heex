@@ -1,0 +1,8 @@
+<.header>
+  Edit Receita <%= @receita.id %>
+  <:subtitle>Use this form to manage receita records in your database.</:subtitle>
+</.header>
+
+<.receita_form changeset={@changeset} action={~p"/receitas/#{@receita}"} />
+
+<.back navigate={~p"/receitas"}>Back to receitas</.back>

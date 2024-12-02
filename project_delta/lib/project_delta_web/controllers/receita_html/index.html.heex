@@ -1,0 +1,93 @@
+<h1 class="mb-4 text-center">Gerenciamento de Receitas</h1>
+
+<!-- Formulário de Filtro -->
+<div class="filter-form card p-4 shadow-lg border-0 rounded mb-5 bg-light">
+  <h3 class="mb-4 text-secondary text-center">Filtrar Receitas</h3>
+  <form phx-submit="list_receitas_with_filters" class="form-inline">
+    <div class="row gy-3">
+      <!-- Filtro por Mês -->
+      <div class="col-12 col-md-3">
+        <label for="mes" class="form-label">Mês</label>
+        <select name="mes" id="mes" class="form-control rounded-pill">
+          <option value="">Selecione o mês</option>
+          <option value="01">Janeiro</option>
+          <option value="02">Fevereiro</option>
+          <option value="03">Março</option>
+          <option value="04">Abril</option>
+          <option value="05">Maio</option>
+          <option value="06">Junho</option>
+          <option value="07">Julho</option>
+          <option value="08">Agosto</option>
+          <option value="09">Setembro</option>
+          <option value="10">Outubro</option>
+          <option value="11">Novembro</option>
+          <option value="12">Dezembro</option>
+        </select>
+      </div>
+
+      <!-- Filtro por Período -->
+      <div class="col-12 col-md-4">
+        <label for="periodo" class="form-label">Período</label>
+        <input type="text" name="periodo" id="periodo" class="form-control rounded-pill" placeholder="Ex: 01/2023 a 12/2023">
+      </div>
+
+      <!-- Filtro por Ordenação -->
+      <div class="col-12 col-md-3">
+        <label for="ordenacao" class="form-label">Ordenação</label>
+        <select name="ordenacao" id="ordenacao" class="form-control rounded-pill">
+          <option value="">Selecione uma opção</option>
+          <option value="maiores">Maiores Receitas</option>
+          <option value="menores">Menores Receitas</option>
+        </select>
+      </div>
+
+      <!-- Botão de Filtrar -->
+      <div class="col-12 col-md-2 d-flex align-items-end">
+        <button type="submit" class="btn btn-primary w-100 rounded-pill">Filtrar</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<!-- Botões de Ação -->
+<div class="actions mb-4 d-flex justify-content-between align-items-center">
+  <h2 class="text-primary">Lista de Receitas</h2>
+  <.link href={~p"/receitas/new"} class="btn btn-success rounded-pill shadow">Adicionar Receita</.link>
+</div>
+
+<!-- Tabela para Exibição das Receitas -->
+<div class="table-responsive rounded shadow-lg">
+  <table id="receitas" class="table table-bordered table-striped">
+    <thead class="table-secondary text-center">
+      <tr>
+        <th>Descrição</th>
+        <th>Valor</th>
+        <th>Data</th>
+        <th>Categoria</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= for receita <- @receitas do %>
+        <tr>
+          <td><%= receita.descricao %></td>
+          <td class="text-success"><strong>R$ <%= Decimal.to_string(receita.valor, :normal) %></strong></td>
+          <td><%= receita.data |> Date.to_iso8601 %></td>
+          <td><%= receita.categoria %></td>
+          <td class="text-center">
+            <div class="d-flex justify-content-center gap-2">
+              <!-- Botão de Editar -->
+              <.link href={~p"/receitas/#{receita.id}/edit"} class="btn btn-outline-primary btn-sm rounded-pill">
+                Editar
+              </.link>
+              <!-- Botão de Excluir -->
+              <.link href={~p"/receitas/#{receita.id}"} method="delete" data-confirm="Tem certeza?" class="btn btn-outline-danger btn-sm rounded-pill">
+                Excluir
+              </.link>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

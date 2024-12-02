@@ -1,0 +1,10 @@
+<.header>
+  Edit Despesa <%= @despesa.id %>
+  <:subtitle>Use this form to manage despesa records in your database.</:subtitle>
+</.header>
+
+<!-- Formulário com botão de envio -->
+<.despesa_form changeset={@changeset} action={~p"/despesas/#{@despesa}"} />
+
+
+

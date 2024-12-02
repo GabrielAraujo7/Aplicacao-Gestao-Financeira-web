@@ -1,0 +1,9 @@
+<.header>
+  Novas Despesas
+  <:subtitle>
+    Utilize este formulário para gerenciar registros de despesas em seu banco de dados.</:subtitle>
+</.header>
+
+<.despesa_form changeset={@changeset} action={~p"/despesas"} />
+
+<.back navigate={~p"/despesas"}>Back to despesas</.back>
